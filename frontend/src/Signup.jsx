@@ -18,7 +18,7 @@ export default function Signup() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        '${API_URL}/api/register',
+        `${API_URL}/api/register`,
         formData,
         {
           headers: { "Content-Type": "application/json" },
