@@ -1,28 +1,91 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Product() {
-  const [data, setData] = useState([]); // ✅ Change from {} to []
+export default function Product({ searchQuery }) {
+  const [data, setData] = useState([]);
+  const [quantities, setQuantities] = useState({}); 
+  const [selectedProduct, setSelectedProduct] = useState(null); 
 
   useEffect(() => {
-    const getdata = async () => {
+    const getData = async () => {
       try {
         const res = await axios.get("http://localhost:3000/api/products");
-        setData(res.data); // ✅ Ensure API returns an array
+        setData(res.data);
         console.log(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-    getdata();
+    getData();
   }, []);
+
+  const filteredData = data.filter(
+    (restaurant) =>
+      restaurant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      restaurant.cuisine.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  function addToCart(product) {
+    const user = JSON.parse(localStorage.getItem("userId"));
+    if (!user) {
+      alert("Before adding to cart, please log in first.");
+      return;
+    }
+
+    if (selectedProduct === product._id) {
+      const productId = product._id;
+      const type=2;
+      const userId = user;
+      const price = product.price;
+      const restaurant = product.cuisine;
+      const name = product.name;
+      const address = product.address || "Unknown";
+      const quantity = quantities[productId] || 1;
+      const image = product.image;
+
+      axios
+        .post("http://localhost:3000/api/order", {
+          productId,
+          userId,
+          type,
+          name,
+          image,
+          price,
+          restaurant,
+          address,
+          quantity,
+        })
+        .then((response) => {
+          console.log("Added to cart:", response.data);
+          setSelectedProduct(null); 
+          setQuantities((prev) => ({ ...prev, [productId]: 1 })); 
+        })
+        .catch((error) => {
+          console.error("Error adding to cart:", error);
+        });
+    } else {
+      setSelectedProduct(product._id); 
+      setQuantities((prev) => ({ ...prev, [product._id]: 1 })); 
+    }
+  }
+
+  const increment = (productId) => {
+    setQuantities((prev) => ({ ...prev, [productId]: (prev[productId] || 1) + 1 }));
+  };
+
+  const decrement = (productId) => {
+    if (quantities[productId] > 1) {
+      setQuantities((prev) => ({ ...prev, [productId]: prev[productId] - 1 }));
+    }
+  };
 
   return (
     <div className="container mt-5">
       <h1 className="mb-4">Products</h1>
       <div className="row justify-content-center">
-        {Array.isArray(data) && data.length > 0 ? (
-          data.map((restaurant, index) => (
-            <div key={index} className="col-md-3 rounded" id="effecthm">
+        {filteredData.length > 0 ? (
+          filteredData.map((restaurant) => (
+            <div key={restaurant._id} className="col-md-3 rounded" id="effecthm">
               <div className="card shadow-sm p-3 mb-4">
                 <img
                   src={restaurant.image}
@@ -39,16 +102,30 @@ export default function Product() {
                   </div>
                   <h5 className="mt-2">{restaurant.name}</h5>
                   <p className="text-muted">{restaurant.cuisine}</p>
-                  <p className="text-muted">
-                    {restaurant.deliveryTime} • {restaurant.priceForTwo}
-                  </p>
+                  <p className="text-muted">{restaurant.deliveryTime} • ${restaurant.price}</p>
                   <p className="text-danger fw-bold">{restaurant.discount}</p>
+
+                  {selectedProduct === restaurant._id && (
+                    <div className="d-flex justify-content-center align-items-center my-2">
+                      <button className="btn btn-outline-dark" onClick={() => decrement(restaurant._id)}>
+                        -
+                      </button>
+                      <span className="mx-2">{quantities[restaurant._id] || 1}</span>
+                      <button className="btn btn-outline-dark" onClick={() => increment(restaurant._id)}>
+                        +
+                      </button>
+                    </div>
+                  )}
                 </div>
+
+                <button className="btn btn-dark w-100" onClick={() => addToCart(restaurant)}>
+                  {selectedProduct === restaurant._id ? "Confirm & Add to Cart" : "Add to Cart"}
+                </button>
               </div>
             </div>
           ))
         ) : (
-          <p>Loading products...</p> // ✅ Added loading message
+          <p className="text-center">No products found.</p>
         )}
       </div>
     </div>

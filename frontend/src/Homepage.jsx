@@ -76,7 +76,7 @@ export default function Homepage() {
           <div className="col-sm-3"></div>
           <div className="col-sm-6 p-4">
             <button id="0" onClick={navaction} className='btn btn-dark m-2'>Home</button>
-            <button id="1" onClick={navaction} className='btn btn-dark m-2'>Shop</button>
+            <button id="1" onClick={navaction} className='btn btn-dark m-2'>Hotel</button>
             <button id="2" onClick={navaction} className='btn btn-dark m-2'>Product</button>
             <button id="3" onClick={navaction} className='btn btn-dark m-2'>About Us</button>
             {choice ? (
@@ -125,15 +125,15 @@ export default function Homepage() {
             </div>
             <div className="container mt-5 bg bg-light">
               <h1 className='mb-3'>Collection</h1>
-                <div className="row">
+                <div className="row justify-content-center">
                     {data.map((item, index) => (
-                        <div className="col-sm-2 border border-grey m-3 text-center" id='collections' key={index} >
-                            <div className="row justify-content-center"  id="1"  onClick={navaction}>
+                        <div className="col-sm-2 border border-grey text-center m-2" id='collections' key={index} >
+                            <div className="row justify-content-center"  id="2"  onClick={navaction}>
                                 <div className="col-sm-8">
                                     <img src="collection-img.png" id="imgs" alt={item.name} />
                                 </div>
                             </div>
-                            <div className="row" id="1"  onClick={navaction}>
+                            <div className="row" id="2"  onClick={navaction}>
                                 <h5>{item.name}</h5>
                                 <p>{item.count} Restaurants</p>
                             </div>
@@ -145,29 +145,29 @@ export default function Homepage() {
               <h1 className='mb-3'>Top Restaurants</h1>
                 <div className="row">
                     {data2.map((restaurant, index) => (
-                         <div key={index} className="col-md-3 rounded " id="effecthm">
-                         <div className="card shadow-sm p-3 mb-4">
-                           <img
+                         <div key={index} className="col-md-3 rounded " id="1" onClick={navaction}>
+                         <div className="card shadow-sm p-3 mb-4" onClick={navaction} id="2">
+                           <img onClick={navaction} 
                              src={restaurant.image} 
                              className="card-img-top rounded"
                              alt={restaurant.name}
                              id="imgss"
                            />
-                           <div className="card-body">
+                           <div className="card-body" onClick={navaction} id="">
                              <div className="d-flex justify-content-between align-items-center">
-                               <span className="badge bg-success text-white p-2">
+                               <span className="badge bg-success text-white p-2" onClick={navaction} id="2">
                                  {restaurant.rating} ⭐
                                </span>
                                <button className="btn btn-outline-danger border-0">
                                  ❤️
                                </button>
                              </div>
-                             <h5 className="mt-2">{restaurant.name}</h5>
+                             <h5 className="mt-2" onClick={navaction} id="2">{restaurant.name}</h5>
                             
-                             <p className="text-muted">
+                             <p className="text-muted" onClick={navaction} id="2">
                                {restaurant.deliveryTime} • {restaurant.priceForTwo}
                              </p>
-                             <p className="text-danger fw-bold">{restaurant.offer}</p>
+                             <p className="text-danger fw-bold">{restaurant.address}</p>
                            </div>
                          </div>
                        </div>

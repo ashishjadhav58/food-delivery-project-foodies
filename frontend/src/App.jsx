@@ -6,6 +6,7 @@ import Signup from './Signup';
 import Shop from './Shop';
 import Product from './Product';
 import Aboutus from './Aboutus';
+import AddCart from './AddCart';
 import Navbar from './Navbar';
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Routes>
           <Route path='/' element={<Homepage/>}/>
           <Route path='/signup' element={<Signup/>}/>
+          <Route path='/addcart' element={<AddCart/>}/>
           <Route path='/signin' element={<Signin/>}/>
           <Route path='/product' element={<Navbar/>}/>
         </Routes>
