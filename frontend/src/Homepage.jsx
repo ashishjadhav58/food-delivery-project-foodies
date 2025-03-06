@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./Style.css";
+import "../assets/style.css";
+
 import { Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 

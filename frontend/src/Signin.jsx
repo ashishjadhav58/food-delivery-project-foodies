@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import "./style.css";
+import "../assets/style.css";
+
 
 export default function Signin() {
   const [email, setEmail] = useState(""); // ✅ Updated setemail to setEmail

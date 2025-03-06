@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
+import "../assets/style.css";
 
 export default function Signup() {
   const [log, setlog] = useState(false);
