@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"],
+    origin: ["http://localhost:5173", "http://localhost:3000","https://food-delivery-project-foodies-67kq.vercel.app","https://food-delivery-project-foodies-2.onrender.com"],
     methods: ["GET", "POST","DELETE"],
     allowedHeaders: ["Content-Type"],
   })
