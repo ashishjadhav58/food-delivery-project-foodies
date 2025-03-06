@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import "../assets/style.css";
+import "./assets/style.css";
+
 
 
 export default function Signin() {
