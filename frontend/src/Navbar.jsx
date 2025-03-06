@@ -3,7 +3,6 @@ import { useLocation, Navigate } from "react-router-dom";
 import Aboutus from "./Aboutus";
 import Shop from "./Shop";
 import Product from "./Product";
-import "./style.css";
 
 
 export default function Navbar() {
