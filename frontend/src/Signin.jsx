@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import "./style.css";
 
 
 
@@ -49,7 +48,7 @@ export default function Signin() {
           <div className="col-sm-8 text-center mt-5">
             <div className="row">
               <div className="col-sm-1">
-                <img className="ms-5" src="logo.png" alt="Logo" id="logo" />
+                <img className="ms-5" src="logo.png" alt="Logo" id="logo" style={{ width: "50px",height: "50px"}} />
               </div>
             </div>
             <br />
@@ -61,6 +60,9 @@ export default function Signin() {
                   <br />
                   <input
                     id="log"
+                    style={{width: "100%",
+                      height: "50px",
+                      borderRadius: "25px"}}
                     type="text"
                     className="bg bg-grey border border-grey form-control"
                     name="email"
@@ -72,6 +74,9 @@ export default function Signin() {
                   <br />
                   <input
                     id="log"
+                    style={{width: "100%",
+                      height: "50px",
+                      borderRadius: "25px"}}
                     type="password"
                     className="bg bg-grey border border-grey form-control"
                     name="password"
@@ -85,6 +90,7 @@ export default function Signin() {
                   <br />
                   <button
                     id="signin"
+                    style={{ backgroundColor: "rgb(255, 136, 0)" }}
                     type="submit"
                     className="btn pt-2 pb-2 ps-4 pe-4"
                   >
@@ -96,11 +102,12 @@ export default function Signin() {
           </div>
 
           {/* Sign Up Section */}
-          <div id="signin" className="col-sm-4 text-center"><br /><br /><br /><br /><br /><br /><br /><br /><br />
+          <div id="signin" style={{ backgroundColor: "rgb(255, 136, 0)" }} className="col-sm-4 text-center"><br /><br /><br /><br /><br /><br /><br /><br /><br />
             <h1 className="text text-light">Welcome to Sign In</h1>
             <h6 className="text text-light">Don't have an account?</h6>
             <button
               id="log-submit"
+              style={{borderRadius: "25px"}}
               onClick={() => setsp(true)}
               className="bg bg-light border border-light pt-2 pb-2 ps-4 pe-4"
             >

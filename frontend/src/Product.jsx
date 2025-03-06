@@ -86,10 +86,11 @@ export default function Product({ searchQuery }) {
         {filteredData.length > 0 ? (
           filteredData.map((restaurant) => (
             <div key={restaurant._id} className="col-md-3 rounded" id="effecthm">
-              <div className="card shadow-sm p-3 mb-4">
+              <div className="card shadow-sm p-3 mb-4 text-center">
                 <img
+                  style={{width:"100%",height:"200px"}}
                   src={restaurant.image}
-                  className="card-img-top rounded"
+                  className="card-img-top rounded text-center"
                   alt={restaurant.name}
                   id="imgss"
                 />

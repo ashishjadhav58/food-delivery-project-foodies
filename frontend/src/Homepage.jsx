@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./style.css";
 
 
 import { Navigate } from "react-router-dom";
@@ -58,7 +57,7 @@ export default function Homepage() {
       const selectedNav = parseInt(Event.currentTarget.id);
       setnav(selectedNav);
     }
-  
+    
 
   return (
     <div className="bg bg-light">
@@ -68,7 +67,7 @@ export default function Homepage() {
             <div className="row">
               <div className="col-sm-3"></div>
               <div className="col-sm-1">
-                <img id="logo" className="text-center" src="logo.png" alt="Logo" />
+                <img id="logo" style={{ width: "50px",height: "50px"}} className="text-center" src="logo.png" alt="Logo" />
               </div>
               <div className="col-sm-5">
                 <h4 className="text text-light mt-2 ms-3">Foodies</h4>
@@ -82,11 +81,17 @@ export default function Homepage() {
             <button id="2" onClick={navaction} className='btn btn-dark m-2'>Product</button>
             <button id="3" onClick={navaction} className='btn btn-dark m-2'>About Us</button>
             {choice ? (
-              <button className="btn btn-dark ps-3 pe-3 ms-4" onClick={logout} id="signin">
-                Welcome {user1}
-              </button>
+              <button 
+              className="btn btn-dark ps-3 pe-3 ms-4" 
+              style={{ backgroundColor: "rgb(255, 136, 0)" }} 
+              onClick={logout} 
+              id="signin"
+            >
+              Welcome {user1}
+            </button>
+            
             ) : (
-              <button className="btn btn-dark ps-3 pe-3 ms-4" id="signin" onClick={opensignin}>
+              <button className="btn btn-dark ps-3 pe-3 ms-4" id="signin"  style={{ backgroundColor: "rgb(255, 136, 0)" }}  onClick={opensignin}>
                 Sign In
               </button>
             )}
@@ -98,8 +103,8 @@ export default function Homepage() {
                 <div className="row">
                     <div className="col-sm-5 border border-grey rounded" id="effecthm" >
                         <div className="row" id="2"  onClick={navaction} >
-                            <div className="col-sm-12" id="img-home">
-                                <img className='rounded' id="img-home" src="online-home.jpg" alt="Order Online" />
+                            <div className="col-sm-12" id="img-home" style={{ width: "100%",height: "200px",padding: "0%"}}>
+                                <img className='rounded' id="img-home" style={{ width: "100%",height: "200px",padding: "0%"}} src="online-home.jpg" alt="Order Online" />
                             </div>
                         </div>
                         <div className="row" id="2"  onClick={navaction}>
@@ -112,8 +117,8 @@ export default function Homepage() {
                     <div className="col-sm-2"></div>
                     <div className="col-sm-5 border border-grey rounded" id="effecthm">
                         <div className="row" id="1"  onClick={navaction}>
-                            <div className="col-sm-12" id="img-home">
-                                <img className='rounded' id="img-home" src="Dining-home.jpg" alt="Dining" />
+                            <div className="col-sm-12" id="img-home" style={{ width: "100%",height: "200px",padding: "0%"}}>
+                                <img className='rounded' id="img-home" src="Dining-home.jpg" alt="Dining" style={{ width: "100%",height: "200px",padding: "0%"}}/>
                             </div>
                         </div>
                         <div className="row" id="1"  onClick={navaction}>
@@ -129,10 +134,28 @@ export default function Homepage() {
               <h1 className='mb-3'>Collection</h1>
                 <div className="row justify-content-center">
                     {data.map((item, index) => (
-                        <div className="col-sm-2 border border-grey text-center m-2" id='collections' key={index} >
+                        <div 
+                        className="col-sm-2 border border-grey text-center m-2" 
+                        id="collections" 
+                        style={{ backgroundColor: "rgb(255, 210, 159)", borderRadius: "10px" }} 
+                        key={index}
+                      >
+                      
                             <div className="row justify-content-center"  id="2"  onClick={navaction}>
                                 <div className="col-sm-8">
-                                    <img src="collection-img.png" id="imgs" alt={item.name} />
+                                <img 
+  src="collection-img.png" 
+  id="imgs" 
+  alt={item.name} 
+  style={{
+    width: "100px",
+    height: "100px",
+    borderRadius: "100px",
+    marginTop: "10px",
+    marginBottom: "10px"
+  }} 
+/>
+
                                 </div>
                             </div>
                             <div className="row" id="2"  onClick={navaction}>

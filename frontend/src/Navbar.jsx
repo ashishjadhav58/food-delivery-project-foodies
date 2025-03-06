@@ -3,7 +3,6 @@ import { useLocation, Navigate } from "react-router-dom";
 import Aboutus from "./Aboutus";
 import Shop from "./Shop";
 import Product from "./Product";
-import "./style.css";
 
 
 export default function Navbar() {
@@ -32,7 +31,7 @@ export default function Navbar() {
             <div className="row">
               <div className="col-sm-3"></div>
               <div className="col-sm-1">
-                <img id="logo" className="text-center" src="logo.png" alt="Logo" />
+                <img id="logo" className="text-center" style={{ width: "50px",height: "50px"}} src="logo.png" alt="Logo" />
               </div>
               <div className="col-sm-5">
                 <h4 className="text text-light mt-2 ms-3">Foodies</h4>
@@ -44,6 +43,12 @@ export default function Navbar() {
             
             <input 
               id="log"
+              style={{ 
+                width: "100%", 
+                height: "50px", 
+                borderRadius: "25px" 
+              }}
+              
               type="text"
               placeholder=" Search Restaurant or Food"
               value={searchQuery}

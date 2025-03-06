@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import "./style.css";
 
 
 export default function Signup() {
@@ -51,7 +50,7 @@ export default function Signup() {
     <div>
       <div className="conatiner-fluid bg bg-grey pd-5">
         <div className="row justify-content-center ">
-          <div id="signin" className="col-sm-4 text-center">
+          <div id="signin" style={{ backgroundColor: "rgb(255, 136, 0)" }}  className="col-sm-4 text-center">
             <br />
             <br />
             <br />
@@ -67,6 +66,7 @@ export default function Signup() {
             <br />
             <button
               id="log-submit"
+              style={{borderRadius: "25px"}}
               onClick={changetolog}
               className="bg bg-light pt-2 pb-2 ps-4 pe-4 border border-light"
             >
@@ -78,7 +78,7 @@ export default function Signup() {
           <div className="col-sm-8 text-center mt-5">
             <div className="row">
               <div className="col-sm-1">
-                <img className="ms-5" src="logo.png" alt="" id="logo" />
+                <img className="ms-5" src="logo.png"  style={{ width: "50px",height: "50px"}} alt="" id="logo" />
               </div>
             </div>
             <h1 className="mt-4">CREATE YOUR OWN ACCOUNT</h1>
@@ -88,7 +88,10 @@ export default function Signup() {
                   <hr />
                   <br />
                   <input
-                    id="log"
+                    id="log" 
+                    style={{width: "100%",
+                      height: "50px",
+                      borderRadius: "25px"}}
                     type="text"
                     name="name"
                     className="bg bg-grey border border-grey form-control"
@@ -102,6 +105,9 @@ export default function Signup() {
                     type="email"
                     className="bg bg-grey border border-grey form-control"
                     name="email"
+                    style={{width: "100%",
+                      height: "50px",
+                      borderRadius: "25px"}}
                     id="log"
                     placeholder="  Email"
                     required
@@ -114,6 +120,9 @@ export default function Signup() {
                     className="bg bg-grey border border-grey form-control"
                     name="address"
                     id="log"
+                    style={{width: "100%",
+                      height: "50px",
+                      borderRadius: "25px"}}
                     placeholder="  Address"
                     required
                     value={formData.address}
@@ -123,6 +132,9 @@ export default function Signup() {
                   <input
                     name="password"
                     id="log"
+                    style={{width: "100%",
+                      height: "50px",
+                      borderRadius: "25px"}}
                     type="password"
                     className="bg bg-grey border border-grey form-control"
                     placeholder="  Password"
@@ -133,7 +145,7 @@ export default function Signup() {
                   <br />
                   <br />
                   <br />
-                  <button id="signin" type="submit" className="btn ps-4 pe-4">
+                  <button id="signin"  style={{ backgroundColor: "rgb(255, 136, 0)" }} type="submit" className="btn ps-4 pe-4">
                     <b>Sign Up</b>
                   </button>
                 </form>

@@ -71,6 +71,10 @@ export default function Shop({ searchQuery }) {
     }
   };
 
+  const filteredShop = shop.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (loading) return <div className="text-center mt-4">Loading...</div>;
   if (error) return <div className="text-center text-danger mt-4">{error}</div>;
 
@@ -78,11 +82,12 @@ export default function Shop({ searchQuery }) {
     <div className="container">
       <h2 className="my-3">Hotels</h2>
       <div className="row justify-content-center">
-        {shop.length > 0 ? (
-          shop.map((product) => (
+        {filteredShop.length > 0 ? (
+          filteredShop.map((product) => (
             <div key={product._id} className="col-md-3 m-4" id="effecthm">
               <div className="card shadow-sm">
                 <img
+                  style={{width:"100%", height:"200px"}}
                   src={product.image}
                   className="card-img-top"
                   alt={product.name}
