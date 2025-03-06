@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+require("dotenv").config();
 const Restaurant = require("./Models/Restaurant");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -19,14 +20,11 @@ app.use(
   })
 );
 
-mongoose
-  .connect(
-    "mongodb+srv://foodies:foodies@foodiescluster.f908v.mongodb.net/user?retryWrites=true&w=majority&appName=foodiescluster"
-  )
-  .then(() => console.log("Database Connected Successfully"))
-  .catch((error) => console.log("Database Connection Error: " + error));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ Database Connected Successfully"))
+  .catch((error) => console.log("❌ Database Connection Error:", error));
 
-// Register API
+
 app.post("/api/register", async (req, res) => {
   const { name, email, address, password } = req.body;
 
