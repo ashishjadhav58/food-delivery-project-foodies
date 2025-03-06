@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 
-
+import { API_URL } from "./apiPath.js";
 
 export default function Signin() {
   const [email, setEmail] = useState(""); // ✅ Updated setemail to setEmail
@@ -14,7 +14,7 @@ export default function Signin() {
     event.preventDefault(); // Prevent page reload
 
     try {
-      const response = await axios.post("http://localhost:3000/api/login", {
+      const response = await axios.post(`${API_URL}/api/login`, {
         email,
         password,
       });

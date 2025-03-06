@@ -3,7 +3,7 @@ import { useLocation, Navigate } from "react-router-dom";
 import Aboutus from "./Aboutus";
 import Shop from "./Shop";
 import Product from "./Product";
-
+import { API_URL } from "./apiPath.js";
 
 export default function Navbar() {
   const location = useLocation();

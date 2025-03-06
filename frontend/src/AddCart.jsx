@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate,useNavigate } from 'react-router-dom';
-
+import { API_URL } from "./apiPath.js";
 export default function AddCart() {
     const navigate = useNavigate();
   const [data, setData] = useState([]); // for food data
@@ -19,7 +19,7 @@ export default function AddCart() {
       setLoading(true);
       setError(null); // Reset error on each fetch attempt
       try {
-        const response = await axios.get(`http://localhost:3000/api/order/addcart/food/${user}`);
+        const response = await axios.get(`${API_URL}/api/order/addcart/food/${user}`);
         setData(response.data); // Store food data
       } catch (err) {
         setError("Error fetching food data. Please try again.");
@@ -37,7 +37,7 @@ export default function AddCart() {
       setLoading(true);
       setError(null); // Reset error on each fetch attempt
       try {
-        const response = await axios.get(`http://localhost:3000/api/order/addcart/dining/${user}`);
+        const response = await axios.get(`${API_URL}/api/order/addcart/dining/${user}`);
         setData2(response.data); // Store dining data
       } catch (err) {
         setError("Error fetching dining data. Please try again.");
@@ -54,7 +54,7 @@ export default function AddCart() {
       setLoading(true);
       setError(null); // Reset error on each fetch attempt
       try {
-        const response = await axios.get(`http://localhost:3000/api/order/history/${user}`);
+        const response = await axios.get(`${API_URL}/api/order/history/${user}`);
         setData3(response.data); // Store dining data
       } catch (err) {
         setError("Error fetching dining data. Please try again.");
@@ -72,7 +72,7 @@ export default function AddCart() {
     setData(updatedData);
 
     try {
-      await axios.delete(`http://localhost:3000/api/order/addcart/food/delete/${id}`);
+      await axios.delete(`${API_URL}/api/order/addcart/food/delete/${id}`);
     } catch (err) {
       console.error("Error deleting item:", err);
       setError("An error occurred while deleting the item. Please try again.");
@@ -85,7 +85,7 @@ export default function AddCart() {
     setData2(updatedData);
 
     try {
-      await axios.delete(`http://localhost:3000/api/order/addcart/dining/delete/${id}`);
+      await axios.delete(`${API_URL}/api/order/addcart/dining/delete/${id}`);
     } catch (err) {
       console.error("Error deleting item:", err);
       setError("An error occurred while deleting the item. Please try again.");
@@ -97,7 +97,7 @@ export default function AddCart() {
   const handleOrder = async (dataArray) => {
     for (const e of dataArray) {
       try {
-        await axios.post( `http://localhost:3000/api/order/history/post/${e._id }`);
+        await axios.post( `${API_URL}/api/order/history/post/${e._id }`);
         alert("Order Placed Suucessfully")
         navigate("/")
       } catch (err) {

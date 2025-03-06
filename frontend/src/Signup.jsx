@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 
-
+import { API_URL } from "./apiPath.js";
 export default function Signup() {
   const [log, setlog] = useState(false);
   const [done, setdone] = useState(false);
@@ -18,7 +18,7 @@ export default function Signup() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/register",
+        '${API_URL}/api/register',
         formData,
         {
           headers: { "Content-Type": "application/json" },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { API_URL } from "./apiPath.js";
 export default function Shop({ searchQuery }) {
   const navigate = useNavigate();
   const [shop, setShop] = useState([]);
@@ -11,7 +11,7 @@ export default function Shop({ searchQuery }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/restaurants")
+      .get(`${API_URL}/api/restaurants`)
       .then((response) => {
         setShop(response.data);
         setLoading(false);
@@ -39,7 +39,7 @@ export default function Shop({ searchQuery }) {
       const type = "1";
       const image = product.image;
       axios
-        .post("http://localhost:3000/api/order", {
+        .post(`${API_URL}/api/order`, {
           productId,
           userId,
           name,

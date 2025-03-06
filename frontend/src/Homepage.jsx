@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { API_URL } from "./apiPath.js";
 
 import { Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -10,7 +10,7 @@ export default function Homepage() {
   useEffect(() => {
     const fetchShops = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/top/products"); 
+        const response = await axios.get(`${API_URL}/api/top/products`); 
         setdata2(response.data);
       } catch (err) {
         console.error("Error fetching shop data:", err);

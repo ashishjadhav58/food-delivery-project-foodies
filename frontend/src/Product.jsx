@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { API_URL } from "./apiPath.js";
 export default function Product({ searchQuery }) {
   const [data, setData] = useState([]);
   const [quantities, setQuantities] = useState({}); 
@@ -9,7 +9,7 @@ export default function Product({ searchQuery }) {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/products");
+        const res = await axios.get(`${API_URL}/api/products`);
         setData(res.data);
         console.log(res.data);
       } catch (error) {
@@ -44,7 +44,7 @@ export default function Product({ searchQuery }) {
       const image = product.image;
 
       axios
-        .post("http://localhost:3000/api/order", {
+        .post(`${API_URL}/api/order`, {
           productId,
           userId,
           type,
