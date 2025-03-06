@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 import { API_URL } from "./apiPath.js";
 export default function Signup() {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const [log, setlog] = useState(false);
   const [done, setdone] = useState(false);
   const [formData, setFormData] = useState({
@@ -45,12 +47,16 @@ export default function Signup() {
   function changetolog() {
     setlog(true);
   }
+  function changetolog2() {
+    
+    setlog(true);
+  }
 
   return (
     <div>
       <div className="conatiner-fluid bg bg-grey pd-5">
         <div className="row justify-content-center ">
-          <div id="signin" style={{ backgroundColor: "rgb(255, 136, 0)" }}  className="col-sm-4 text-center">
+          {!isMobile ?<div id="signin" style={{ backgroundColor: "rgb(255, 136, 0)" }}  className="col-sm-4 text-center">
             <br />
             <br />
             <br />
@@ -72,8 +78,8 @@ export default function Signup() {
             >
               <b>Sign In</b>
             </button>
-            {log && <Navigate to="/signin" replace={true} />}
-          </div>
+           
+          </div>:""}
           {done && <Navigate to="/" replace state={{ islog: { done } }} />}
           <div className="col-sm-8 text-center mt-5">
             <div className="row">
@@ -149,6 +155,9 @@ export default function Signup() {
                     <b>Sign Up</b>
                   </button>
                 </form>
+                {
+                  isMobile ?  <button onClick={changetolog2} className="bg bg-light border border-light mt-3"> <b>Already Have Account ?</b> </button>:<></>
+                }
                 <br />
                 <br />
                 <br />
@@ -156,6 +165,7 @@ export default function Signup() {
                 <br />
                 <br />
               </div>
+              {log && <Navigate to="/signin" replace={true} />}
             </div>
           </div>
         </div>

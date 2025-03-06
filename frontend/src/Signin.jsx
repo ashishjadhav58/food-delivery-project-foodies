@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-
+import { useMediaQuery } from "react-responsive";
 import { API_URL } from "./apiPath.js";
 
 export default function Signin() {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const [email, setEmail] = useState(""); // ✅ Updated setemail to setEmail
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -97,12 +98,18 @@ export default function Signin() {
                     <b>Sign In</b>
                   </button>
                 </form>
+                {isMobile?<><button
+              id="log-submit"
+              style={{borderRadius: "25px"}}
+              onClick={() => setsp(true)}
+              className="bg bg-light border border-light pt-2 pb-2 ps-4 pe-4"><b>Don't Have an Account</b></button></>:""}
               </div>
             </div>
           </div>
 
           {/* Sign Up Section */}
-          <div id="signin" style={{ backgroundColor: "rgb(255, 136, 0)" }} className="col-sm-4 text-center"><br /><br /><br /><br /><br /><br /><br /><br /><br />
+          {
+            !isMobile ? <div id="signin" style={{ backgroundColor: "rgb(255, 136, 0)" }} className="col-sm-4 text-center"><br /><br /><br /><br /><br /><br /><br /><br /><br />
             <h1 className="text text-light">Welcome to Sign In</h1>
             <h6 className="text text-light">Don't have an account?</h6>
             <button
@@ -113,7 +120,8 @@ export default function Signin() {
             >
               <b>Sign Up</b>
             </button><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-          </div>
+          </div>:""
+          }
         </div>
       </div>
     </div>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { API_URL } from "./apiPath.js";
-
+import { useMediaQuery } from "react-responsive";
 import { Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 export default function Homepage() {
   const location = useLocation();
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const [data2, setdata2] = useState([]);
   useEffect(() => {
     const fetchShops = async () => {
@@ -61,45 +62,68 @@ export default function Homepage() {
 
   return (
     <div className="bg bg-light">
-      <div className="container-fluid bg bg-dark">
-        <div className="row">
-          <div className="col-sm-3 text-center p-4">
-            <div className="row">
-              <div className="col-sm-3"></div>
-              <div className="col-sm-1">
-                <img id="logo" style={{ width: "50px",height: "50px"}} className="text-center" src="logo.png" alt="Logo" />
-              </div>
-              <div className="col-sm-5">
-                <h4 className="text text-light mt-2 ms-3">Foodies</h4>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-3"></div>
-          <div className="col-sm-6 p-4">
-            <button id="0" onClick={navaction} className='btn btn-dark m-2'>Home</button>
-            <button id="1" onClick={navaction} className='btn btn-dark m-2'>Hotel</button>
-            <button id="2" onClick={navaction} className='btn btn-dark m-2'>Product</button>
-            <button id="3" onClick={navaction} className='btn btn-dark m-2'>About Us</button>
+      <div className="bg bg-light">
+      <nav className="navbar navbar-dark bg-dark fixed-top">
+        <div className="container">
+          <a className="navbar-brand d-flex align-items-center" href="#">
+            <img src="logo.png" alt="Logo" width="40" height="40" className="me-2" />
+            <span>Foodies</span>
+          </a>
+
+          {/* Desktop Navbar */}
+          <div className="d-none d-lg-flex">
+            <button id="0" onClick={navaction} className="btn btn-dark m-2">Home</button>
+            <button id="1" onClick={navaction} className="btn btn-dark m-2">Hotel</button>
+            <button id="2" onClick={navaction} className="btn btn-dark m-2">Product</button>
+            <button id="3" onClick={navaction} className="btn btn-dark m-2">About Us</button>
             {choice ? (
-              <button 
-              className="btn btn-dark ps-3 pe-3 ms-4" 
-              style={{ backgroundColor: "rgb(255, 136, 0)" }} 
-              onClick={logout} 
-              id="signin"
-            >
-              Welcome {user1}
-            </button>
-            
+              <button className="btn btn-warning ms-4" onClick={logout}>Welcome {user1}</button>
             ) : (
-              <button className="btn btn-dark ps-3 pe-3 ms-4" id="signin"  style={{ backgroundColor: "rgb(255, 136, 0)" }}  onClick={opensignin}>
-                Sign In
-              </button>
+              <button className="btn btn-warning ms-4" onClick={() => setSignIn(true)}>Sign In</button>
             )}
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="navbar-toggler d-lg-none"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          {/* Offcanvas Menu for Mobile */}
+          <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar">
+            <div className="offcanvas-header">
+              <h5 className="offcanvas-title">Menu</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div className="offcanvas-body">
+              <ul className="navbar-nav me-auto">
+                <li className="nav-item"><button id="0" onClick={navaction} className="btn btn-dark w-100 mb-2">Home</button></li>
+                <li className="nav-item"><button id="1" onClick={navaction} className="btn btn-dark w-100 mb-2">Hotel</button></li>
+                <li className="nav-item"><button id="2" onClick={navaction} className="btn btn-dark w-100 mb-2">Product</button></li>
+                <li className="nav-item"><button id="3" onClick={navaction} className="btn btn-dark w-100 mb-2">About Us</button></li>
+              </ul>
+              {choice ? (
+                <button className=" " style={{ backgroundColor: "rgb(255, 136, 0)" }} onClick={logout}>Welcome {user1}</button>
+              ) : (
+                <button className="" style={{ backgroundColor: "rgb(255, 136, 0)" }} onClick={() => setSignIn(true)}>Sign In</button>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+      {navchoice > 0 && <Navigate to="/product" replace state={{ choice: navchoice }} />}
+      {signin && <Navigate to="/signin" replace />}
+    </div>
+         <div>
           {navchoice > 0 && <Navigate to="/product" replace state={{ choice: navchoice }} />}
           {signin && <Navigate to="/signin" replace={true} />}
-        </div></div>
-        <div className="container bg bg-light pt-5">
+        </div>
+        <div className="container bg bg-light pt-5 mt-5">
                 <div className="row">
                     <div className="col-sm-5 border border-grey rounded" id="effecthm" >
                         <div className="row" id="2"  onClick={navaction} >
@@ -173,6 +197,10 @@ export default function Homepage() {
                          <div key={index} className="col-md-3 rounded " id="1" onClick={navaction}>
                          <div className="card shadow-sm p-3 mb-4" onClick={navaction} id="2">
                            <img onClick={navaction} 
+                           style={{
+                            width:"100%",
+                            height:"200px",
+                           }}
                              src={restaurant.image} 
                              className="card-img-top rounded"
                              alt={restaurant.name}
