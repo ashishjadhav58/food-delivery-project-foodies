@@ -28,14 +28,16 @@ export default function Adminsignup() {
           headers: { "Content-Type": "application/json" },
         }
       );
-      localStorage.setItem("BsId", JSON.stringify(response.data.userId));
-      localStorage.setItem("BsName", JSON.stringify(formData.username));
+      localStorage.setItem("BsEmail", JSON.stringify(formData.email));
+      localStorage.setItem("BsName", JSON.stringify(formData.name));
+      console.log(formData.username);
+      
       setFormData({
-        name: "",
+        name: "",  // ✅ Correct key
         email: "",
         address: "",
         password: "",
-      });
+      });      
       setdone(true);
     } catch (error) {
       console.error(

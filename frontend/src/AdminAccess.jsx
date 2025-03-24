@@ -8,7 +8,7 @@ import { Navigate } from "react-router-dom";
 export default function AdminAccess() {
   const media = useMediaQuery({ maxWidth: 768 });
   const name = JSON.parse(localStorage.getItem("BsName"))
-  const id = JSON.parse(localStorage.getItem("BsId"))
+  const id = JSON.parse(localStorage.getItem("BsE"))
   console.log(name);
   
   const [cn,setcn] = useState(1)
@@ -85,7 +85,7 @@ export default function AdminAccess() {
   {cn === 4 && (
   <>
     {localStorage.removeItem("BsName")}
-    {localStorage.removeItem("BsId")}
+    {localStorage.removeItem("BsEmail")}
     <Navigate to="/" replace={true} />
   </>
 )}

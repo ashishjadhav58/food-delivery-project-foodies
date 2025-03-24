@@ -21,8 +21,8 @@ export default function Admin() {
       });
 
       if (response.data.success) {
-        localStorage.setItem("isLoggedIn", JSON.stringify(true));
-        localStorage.setItem("email", email);
+        localStorage.setItem("isLoggedInn", JSON.stringify(true));
+        localStorage.setItem("BsEmail", JSON.stringify(email));
         setIsLoggedIn(true);
         localStorage.setItem("BsId", JSON.stringify(response.data.userId));
         localStorage.setItem(
@@ -41,7 +41,7 @@ export default function Admin() {
   return (
     <div>
       {/* ✅ Fixed State Passing in Navigate */}
-      {done && <Navigate to="/admin/dashboard" replace state={{ isLoggedIn: done }} />}
+      {done && <Navigate to="/admin/dashboard" replace state={{ isLoggedInn: done }} />}
       {Tosignup && <Navigate to="/admin/signup" replace={true} />}
 
       <div className="container-fluid bg bg-grey pd-5">

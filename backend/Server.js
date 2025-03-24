@@ -242,7 +242,7 @@ app.post("/api/admin/signup",async (req,res)=>{
     await newd.save();
     res.json({status:"200",msg:"Grand"})}
     else{
-      res.json({status:"404",msg:"Already have Account",userId :newd._id})
+      res.json({status:"404",msg:"Already have Account"})
     }
   }
   catch(e){
