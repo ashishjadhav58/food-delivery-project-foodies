@@ -22,14 +22,14 @@ export default function Adminsignup() {
         console.log(formData);
         
       const response = await axios.post(
-        `http://localhost:3000/api/admin/signup`,
+        `${API_URL}/api/admin/signup`,
         formData,
         {
           headers: { "Content-Type": "application/json" },
         }
       );
-      localStorage.setItem("userId", JSON.stringify(response.data.userId));
-      localStorage.setItem("userName", JSON.stringify(response.data.userName));
+      localStorage.setItem("BsId", JSON.stringify(response.data.userId));
+      localStorage.setItem("BsName", JSON.stringify(response.data.userName));
       setFormData({
         name: "",
         email: "",
@@ -82,7 +82,7 @@ export default function Adminsignup() {
             </button>
            
           </div>:""}
-          {done && <Navigate to="/" replace state={{ islog: { done } }} />}
+          {done && <Navigate to="/admin/dashboard" replace state={{ islog: { done } }} />}
           <div className="col-sm-8 text-center mt-5">
             <div className="row">
               <div className="col-sm-1">

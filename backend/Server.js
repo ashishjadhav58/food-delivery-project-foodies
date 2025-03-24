@@ -215,7 +215,12 @@ app.post("/api/admin/signin",async (req,res)=>{
       res.json({status:"404",msg:"Invalid"})
     }
    else{
-    res.json({status:"200",msg:"Grand"})
+    res.json({
+      success: true,
+      message: "Login successful",
+      userName: user.name,
+      userId: user._id,
+    });
    }
   }
   catch(e){

@@ -7,6 +7,10 @@ import { Navigate } from "react-router-dom";
 
 export default function AdminAccess() {
   const media = useMediaQuery({ maxWidth: 768 });
+  const name = localStorage.getItem("BsName")
+  const id = localStorage.getItem("BsId")
+  console.log(name);
+  
   const [cn,setcn] = useState(1)
   function change(e){
     setcn(parseInt(e.target.id));
@@ -16,7 +20,7 @@ export default function AdminAccess() {
       <div className="container-fluid">
         <div className="row justify-content-center pt-3 pb-3 bg bg-danger">
           <div className="col-sm-5">
-            <h1 className="text-center text text-white">South Indian Cafe {media?<>
+            <h1 className="text-center text text-white">{name} {media?<>
             <>
               <button
                 class="btn btn-danger ms-5"
@@ -78,11 +82,14 @@ export default function AdminAccess() {
   {cn === 1 && <DiningSection />}
   {cn === 2 && <FoodSection />}
   {cn === 3 && <OrderSection />}
-  {
-   cn === 4 && 
-    // localStorage.removeItem(("client");
-    <Navigate to="/" replace={true}/>
-  }
+  {cn === 4 && (
+  <>
+    {localStorage.removeItem("BsName")}
+    {localStorage.removeItem("BsId")}
+    <Navigate to="/" replace={true} />
+  </>
+)}
+
 </>
       </div>
     </div>

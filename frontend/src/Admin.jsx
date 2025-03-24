@@ -15,7 +15,7 @@ export default function Admin() {
     event.preventDefault(); // Prevent page reload
 
     try {
-      const response = await axios.post(`${API_URL}/api/login`, {
+      const response = await axios.post(`${API_URL}/api/admin/signin"`, {
         email,
         password,
       });
@@ -24,9 +24,9 @@ export default function Admin() {
         localStorage.setItem("isLoggedIn", JSON.stringify(true));
         localStorage.setItem("email", email);
         setIsLoggedIn(true);
-        localStorage.setItem("userId", JSON.stringify(response.data.userId));
+        localStorage.setItem("BsId", JSON.stringify(response.data.userId));
         localStorage.setItem(
-          "userName",
+          "BsName",
           JSON.stringify(response.data.userName)
         );
       } else {
@@ -41,7 +41,7 @@ export default function Admin() {
   return (
     <div>
       {/* ✅ Fixed State Passing in Navigate */}
-      {done && <Navigate to="/" replace state={{ isLoggedIn: done }} />}
+      {done && <Navigate to="/admin/dashboard" replace state={{ isLoggedIn: done }} />}
       {Tosignup && <Navigate to="/admin/signup" replace={true} />}
 
       <div className="container-fluid bg bg-grey pd-5">
