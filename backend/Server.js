@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: [ "foodies-cixm49vzs-ashish-jadhavs-projects.vercel.app","https://food-delivery-project-foodies-67kq.vercel.app","foodies-orcin.vercel.app","http://localhost:5173/"],
+    origin:  "*",
     methods: ["GET", "POST","DELETE"],
     allowedHeaders: ["Content-Type"],
   })
@@ -242,7 +242,7 @@ app.post("/api/admin/signup",async (req,res)=>{
     await newd.save();
     res.json({status:"200",msg:"Grand"})}
     else{
-      res.json({status:"404",msg:"Already have Account"})
+      res.json({status:"404",msg:"Already have Account",userId :newd._id})
     }
   }
   catch(e){
