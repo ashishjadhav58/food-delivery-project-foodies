@@ -218,8 +218,8 @@ app.post("/api/admin/signin",async (req,res)=>{
     res.json({
       success: true,
       message: "Login successful",
-      userName: user.name,
-      userId: user._id,
+      userName: data.name,
+      userId: data._id,
     });
    }
   }
