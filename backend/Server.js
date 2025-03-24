@@ -250,4 +250,42 @@ app.post("/api/admin/signup",async (req,res)=>{
   }
 })
 
+app.post("/api/restaurants", async (req, res) => {
+  console.log("ali");
+  const { restaurantName,email, discount, availableSeats, contact, openingTime, closingTime } = req.body;
+
+  try {
+      let restaurant = await Restaurant.findOne({ name: restaurantName });
+      let m = await BusinessData.findOne({email:email})
+      if (restaurant) {
+          // Update existing restaurant
+          restaurant.discount = discount;
+          restaurant.availableSeats = availableSeats;
+          restaurant.contact = contact;
+          restaurant.openingTime = openingTime;
+          restaurant.closingTime = closingTime;
+          await restaurant.save();
+          return res.status(200).json({ message: "Restaurant updated successfully!", restaurant });
+      } else {
+          const newRestaurant = new Restaurant({
+              name: restaurantName,
+              seat: availableSeats,
+              contact: contact,
+              openingTime: openingTime,
+              closingTime:closingTime,
+              email:email,
+              rating:5,
+              address:m.address,
+              image:"https://images.unsplash.com/photo-1514513879701-9c82437eab62",
+          });
+
+          await newRestaurant.save();
+          return res.status(201).json({ message: "Restaurant added successfully!", newRestaurant });
+      }
+  } catch (error) {
+      console.error("Error saving restaurant:", error);
+      res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 app.listen(port, () => console.log(` Server running on port ${port}`));

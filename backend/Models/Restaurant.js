@@ -4,13 +4,13 @@ const restaurantSchema = new mongoose.Schema({
   id: Number,
   name: String,
   address: String,
-  seat:Number,
   email:String,
+  discount:Number,
+  availableSeats:Number,
   contact: String,
-  openingHours: String,
+  openingTime: String,
+  closingTime: String,
   rating: Number,
-  latitude: Number,
-  longitude: Number,
   image: String,
 });
 
