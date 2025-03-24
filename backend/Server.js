@@ -9,12 +9,13 @@ const Order = require("./Models/Order.js")
 const userdata = require("./Models/userdata.js");
 const Product = require("./Models/product.js")
 const OrderHistory = require("./Models/OrderHistory.js")
+const BusinessData = require("./Models/BusinessData.js")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ["http://localhost:5173", "foodies-cixm49vzs-ashish-jadhavs-projects.vercel.app","https://food-delivery-project-foodies-67kq.vercel.app","foodies-orcin.vercel.app"],
+    origin: [ "foodies-cixm49vzs-ashish-jadhavs-projects.vercel.app","https://food-delivery-project-foodies-67kq.vercel.app","foodies-orcin.vercel.app","http://localhost:5173/"],
     methods: ["GET", "POST","DELETE"],
     allowedHeaders: ["Content-Type"],
   })
@@ -201,5 +202,47 @@ app.get("/api/order/history/:id",async(req,res)=>{
     res.json({status:"400"})
   }
 }) 
+
+// business Login signup
+
+app.post("/api/admin/signin",async (req,res)=>{
+  const {email,password} = req.body;
+  console.log("ali");
+  
+  try{
+    const data = await BusinessData.findOne({resemail:email,password:password})
+    if(!data){
+      res.json({status:"404",msg:"Invalid"})
+    }
+   else{
+    res.json({status:"200",msg:"Grand"})
+   }
+  }
+  catch(e){
+    res.json({status:"404",msg:"Invalid"}) 
+  }
+})
+
+app.post("/api/admin/signup",async (req,res)=>{
+  const {email,name,address,password} = req.body;
+  try{
+    const m  = await BusinessData.findOne({resemail:email});
+    if(!m){
+    const newd = new BusinessData({
+      resname:name,
+      resemail:email,
+      address:address,
+      password:password
+    })
+    await newd.save();
+    res.json({status:"200",msg:"Grand"})}
+    else{
+      res.json({status:"404",msg:"Already have Account"})
+    }
+  }
+  catch(e){
+    res.json({status:"404",msg:"Invalid"}) 
+  }
+})
 
 app.listen(port, () => console.log(` Server running on port ${port}`));

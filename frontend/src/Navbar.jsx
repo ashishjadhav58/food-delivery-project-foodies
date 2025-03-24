@@ -10,11 +10,14 @@ import { API_URL } from "./apiPath.js";
 export default function Navbar() {
   const location = useLocation();
   const [m, setm] = useState(false);
+  const [a, seta] = useState(false);
   const [s, sets] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [show, setShow] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 768 });
-
+  function adminn(){
+    seta(true)
+  }
   const choice2 = location.state?.choice;
   console.log(choice2);
 
@@ -28,7 +31,7 @@ export default function Navbar() {
     <div>
       {m && <Navigate to="/" replace={true} />}
       {s && <Navigate to="/addcart" replace={true} />}
-
+      {a && <Navigate to="/admin" replace={true} />}
       <div className="container-fluid bg bg-dark p-3">
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
@@ -85,7 +88,7 @@ export default function Navbar() {
       <div className="container-fluid bg bg-dark pt-3 mt-5">
         <div className="row justify-content-center">
           <div className="col-sm-4 text-center">
-            <p className="text-light">© 2025 Foodies. All Rights Reserved.</p>
+            <p className="text-light">© 2025 . <button className="btn btn- dark bg bg-dark text text-light p-0" onClick={adminn}>Foodies</button> All Rights Reserved.</p>
           </div>
         </div>
       </div>

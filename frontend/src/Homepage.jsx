@@ -20,6 +20,10 @@ export default function Homepage() {
     fetchShops();
   }, []);
   const [navchoice, setnav] = useState(0);
+  const [a,seta]=useState(false)
+  function adminn(){
+    seta(true)
+  }
   const [data, setdata] = useState([
     { name: "Burger", count: 1 },
     { name: "Biryani", count: 1 },
@@ -119,6 +123,8 @@ export default function Homepage() {
       {navchoice > 0 && <Navigate to="/product" replace state={{ choice: navchoice }} />}
       {signin && <Navigate to="/signin" replace />}
     </div>
+    
+          {a && <Navigate to="/admin" replace={true} />}
          <div>
           {navchoice > 0 && <Navigate to="/product" replace state={{ choice: navchoice }} />}
           {signin && <Navigate to="/signin" replace={true} />}
@@ -230,7 +236,7 @@ export default function Homepage() {
             <div className="container-fluid bg bg-dark pt-3 mt-5">
               <div className="row justify-content-center">
                     <div className="col-sm-4 text-center">
-                      <p className='text text-light'>© 2025 Foodies. All Rights Reserved. </p>
+                      <p className='text text-light'>© 2025 <button onClick={adminn} className="btn btn-dark p-0">Foodies.</button> All Rights Reserved. </p>
                     </div>
               </div>
             </div>

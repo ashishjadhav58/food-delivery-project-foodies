@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate,useNavigate } from 'react-router-dom';
-import { API_URL } from "./apiPath.js";
+import { API_URL } from "./apiPath.js"
+import { Star } from "lucide-react";
 export default function AddCart() {
     const navigate = useNavigate();
   const [data, setData] = useState([]); // for food data
@@ -11,6 +12,8 @@ export default function AddCart() {
   const [loading, setLoading] = useState(false); // To track loading state
   const [error, setError] = useState(null); // To track any error in the requests
   const [orderError, setOrderError] = useState(null); // For order errors
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [rating, setRating] = useState(0);
   const foodTotal = data.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   // Fetch food data on mount
@@ -94,16 +97,23 @@ export default function AddCart() {
   };
 
   // Function to handle the orders
-  const handleOrder = async (dataArray) => {
-    for (const e of dataArray) {
-      try {
-        await axios.post( `${API_URL}/api/order/history/post/${e._id }`);
-        alert("Order Placed Suucessfully")
-        navigate("/")
-      } catch (err) {
-        console.log(err);
-        setOrderError("Error occurred while saving the order.");
-      }
+  // Open the modal using Bootstrap JavaScript
+  const handleRateOrder = (order) => {
+    setSelectedOrder(order);
+    setRating(0); // Reset rating
+    const modal = new bootstrap.Modal(document.getElementById("ratingModal"));
+    modal.show();
+  };
+
+  const submitRating = async () => {
+    try {
+      await axios.post(`${API_URL}/api/order/rate/${selectedOrder._id}`, { rating });
+      alert(`Thanks for rating ${rating} stars!`);
+      const modal = bootstrap.Modal.getInstance(document.getElementById("ratingModal"));
+      modal.hide();
+    } catch (err) {
+      console.error("Error submitting rating:", err);
+      setError("Error submitting rating. Try again.");
     }
   };
 
@@ -266,6 +276,32 @@ export default function AddCart() {
                 )}
               </div>
             )}
+          </div>
+        </div>
+      </div>
+      <div className="modal fade" id="ratingModal" tabIndex="-1" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Rate Your Order</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div className="modal-body text-center">
+              <div className="d-flex justify-content-center">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    onClick={() => setRating(i + 1)}
+                    className={`cursor-pointer mx-1 ${i < rating ? "text-warning" : "text-secondary"}`}
+                  />
+                ))}
+              </div>
+              <p className="mt-2">You rated: {rating} Stars</p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" className="btn btn-primary" onClick={submitRating}>Submit Rating</button>
+            </div>
           </div>
         </div>
       </div>
