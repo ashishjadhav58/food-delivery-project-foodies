@@ -218,7 +218,7 @@ app.post("/api/admin/signin",async (req,res)=>{
     res.json({
       success: true,
       message: "Login successful",
-      userName: data.name,
+      userName: data.resname,
       userId: data._id,
     });
    }

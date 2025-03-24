@@ -7,8 +7,8 @@ import { Navigate } from "react-router-dom";
 
 export default function AdminAccess() {
   const media = useMediaQuery({ maxWidth: 768 });
-  const name = localStorage.getItem("BsName")
-  const id = localStorage.getItem("BsId")
+  const name = JSON.parse(localStorage.getItem("BsName"))
+  const id = JSON.parse(localStorage.getItem("BsId"))
   console.log(name);
   
   const [cn,setcn] = useState(1)

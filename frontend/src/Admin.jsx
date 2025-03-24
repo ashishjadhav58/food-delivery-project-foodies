@@ -15,7 +15,7 @@ export default function Admin() {
     event.preventDefault(); // Prevent page reload
 
     try {
-      const response = await axios.post(`${API_URL}/api/admin/signin"`, {
+      const response = await axios.post(`${API_URL}/api/admin/signin`, {
         email,
         password,
       });

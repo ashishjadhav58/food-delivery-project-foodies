@@ -29,7 +29,7 @@ export default function Adminsignup() {
         }
       );
       localStorage.setItem("BsId", JSON.stringify(response.data.userId));
-      localStorage.setItem("BsName", JSON.stringify(response.data.userName));
+      localStorage.setItem("BsName", JSON.stringify(formData.username));
       setFormData({
         name: "",
         email: "",
